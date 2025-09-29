@@ -1,0 +1,64 @@
+# Fichiers de cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+
+# Environnements virtuels
+venv_mcan/
+env/
+venv/
+ENV/
+
+# Modèles PyTorch (trop volumineux pour Git)
+checkpoint/
+checkpoint1/*.pth
+*.pth
+
+# Données de datasets (trop volumineux)
+CAVE_dataset/
+dataset_msimaker/
+real_images/
+images/
+
+# Résultats générés
+resultats_demo/
+resultats_bandes/
+resultats_bandes1/
+resultats_bandes2/
+resultats_bandes3/
+resultats_bandes4/
+visual_results/
+
+# Fichiers de logs et résultats
+*.log
+*.txt
+output*.txt
+resultat*.txt
+data*.csv
+
+# Fichiers temporaires
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Fichiers d'images générées
+*.png
+*.tif
+*.tiff
+raw.tif
+
+# IDE et éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Autres fichiers volumineux
+*.zip
+*.tar.gz
+*.rar
