@@ -1,0 +1,45 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Travaux Connexes}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{M\351thodes Bas\351es sur l'Interpolation}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Approches de D\351mosa\357quage Bas\351es sur les CNN}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Approches Bas\351es sur l'Attention et les Transformeurs}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Nos Contributions}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{M\351thode Propos\351e}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Formulation du Probl\350me}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Architecture Globale}{section.3}% 9
+\BOOKMARK [1][-]{section.4}{Descripteur Transformeur Mosa\357que \(MTD\)}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Motivation et Philosophie de Conception}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Architecture MTD}{section.4}% 12
+\BOOKMARK [3][-]{subsubsection.4.2.1}{\311tape 1 : Brassage Spatial Descendant}{subsection.4.2}% 13
+\BOOKMARK [3][-]{subsubsection.4.2.2}{\311tape 2 : Projection de Canaux}{subsection.4.2}% 14
+\BOOKMARK [3][-]{subsubsection.4.2.3}{\311tape 3 : Auto-attention Multi-T\352tes \(Innovation Cl\351\)}{subsection.4.2}% 15
+\BOOKMARK [3][-]{subsubsection.4.2.4}{\311tape 4 : G\351n\351ration de Carte d'Attention}{subsection.4.2}% 16
+\BOOKMARK [3][-]{subsubsection.4.2.5}{\311tape 5 : Modulation de Caract\351ristiques}{subsection.4.2}% 17
+\BOOKMARK [3][-]{subsubsection.4.2.6}{\311tape 6 : Brassage Spatial Ascendant}{subsection.4.2}% 18
+\BOOKMARK [2][-]{subsection.4.3}{Analyse de la Complexit\351 Computationnelle}{section.4}% 19
+\BOOKMARK [2][-]{subsection.4.4}{Pourquoi Cette Conception R\351ussit}{section.4}% 20
+\BOOKMARK [1][-]{section.5}{Autres Composants}{}% 21
+\BOOKMARK [2][-]{subsection.5.1}{Module de D\351bruitage}{section.5}% 22
+\BOOKMARK [2][-]{subsection.5.2}{Convolution de Balance des Blancs}{section.5}% 23
+\BOOKMARK [2][-]{subsection.5.3}{Module Position-vers-Poids \(Pos2Weight\)}{section.5}% 24
+\BOOKMARK [2][-]{subsection.5.4}{Conv\137attention\137Block}{section.5}% 25
+\BOOKMARK [2][-]{subsection.5.5}{Fonction de Perte}{section.5}% 26
+\BOOKMARK [1][-]{section.6}{Configuration Exp\351rimentale}{}% 27
+\BOOKMARK [2][-]{subsection.6.1}{Ensemble de Donn\351es}{section.6}% 28
+\BOOKMARK [2][-]{subsection.6.2}{Configuration d'Entra\356nement}{section.6}% 29
+\BOOKMARK [2][-]{subsection.6.3}{Statistiques du Mod\350le}{section.6}% 30
+\BOOKMARK [2][-]{subsection.6.4}{M\351triques d'\311valuation}{section.6}% 31
+\BOOKMARK [1][-]{section.7}{R\351sultats et Analyse}{}% 32
+\BOOKMARK [2][-]{subsection.7.1}{Comparaison Quantitative}{section.7}% 33
+\BOOKMARK [2][-]{subsection.7.2}{Dynamique d'Entra\356nement}{section.7}% 34
+\BOOKMARK [2][-]{subsection.7.3}{\311tude d'Ablation}{section.7}% 35
+\BOOKMARK [2][-]{subsection.7.4}{Analyse de Performance par Bande}{section.7}% 36
+\BOOKMARK [2][-]{subsection.7.5}{\311valuation de la Qualit\351 Visuelle}{section.7}% 37
+\BOOKMARK [2][-]{subsection.7.6}{Visualisation de l'Attention}{section.7}% 38
+\BOOKMARK [1][-]{section.8}{Discussion}{}% 39
+\BOOKMARK [2][-]{subsection.8.1}{Pourquoi le MTD Excelle}{section.8}% 40
+\BOOKMARK [2][-]{subsection.8.2}{Comparaison avec les Transformeurs de Vision}{section.8}% 41
+\BOOKMARK [2][-]{subsection.8.3}{Limitations}{section.8}% 42
+\BOOKMARK [2][-]{subsection.8.4}{Travaux Futurs}{section.8}% 43
+\BOOKMARK [1][-]{section.9}{Conclusion}{}% 44
+\BOOKMARK [1][-]{section*.16}{References}{}% 45

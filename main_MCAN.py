@@ -3,6 +3,7 @@ import torchvision.utils as vutils
 import torch
 import random
 import torch.backends.cudnn as cudnn
+from datetime import datetime
 import torch.nn as nn
 import torch.optim as optim
 from torch.autograd import Variable
@@ -16,25 +17,41 @@ from math import log10
 # Training settings
 parser = argparse.ArgumentParser(description="PyTorch LapSRN")
 parser.add_argument("--batchSize", type=int, default=32, help="training batch size")
-parser.add_argument("--nEpochs", type=int, default=85, help="number of epochs to train for")
+parser.add_argument("--nEpochs", type=int, default=300, help="number of epochs to train for")
 parser.add_argument("--lr", type=float, default=2e-3, help="Learning Rate. Default=1e-4")
 parser.add_argument("--step", type=int, default=2000, help="Sets the learning rate to the initial LR decayed by momentum every n epochs, Default: n=10")
 parser.add_argument("--cuda", action="store_true", help="Use cuda?")
-parser.add_argument("--resume", default  ="checkpoint/De_happy_model_epoch_.pth", type=str, help="Path to checkpoint (default: none)")
+parser.add_argument("--resume", default="", type=str, help="Path to checkpoint (default: none)")
 parser.add_argument("--start-epoch", default=1, type=int, help="Manual epoch number (useful on restarts)")
 parser.add_argument("--threads", type=int, default=0, help="Number of threads for data loader to use, Default: 1")
 parser.add_argument("--momentum", default=0.9, type=float, help="Momentum, Default: 0.9")
 parser.add_argument("--weight-decay", "--wd", default=1e-4, type=float, help="weight decay, Default: 1e-4")
 parser.add_argument("--pretrained", default="", type=str, help="path to pretrained model (default: none)")
 parser.add_argument('--msfa_size', '-uf',  type=int, default=4, help="the size of square msfa")
+parser.add_argument("--checkpoint_dir", default="", type=str, help="custom checkpoint directory (auto-generated if empty)")
 parser.add_argument("--train_dir", default="CAVE_dataset/new_train", type=str, help="path to train dataset")
 parser.add_argument("--val_dir", default="CAVE_dataset/new_val", type=str, help="path to validation dataset")
 
 
 def main() -> object:
 
-    global opt, model
+    global opt, model, checkpoint_folder
     opt = parser.parse_args()
+    
+    # Créer un dossier de checkpoint unique pour cet entraînement
+    if opt.checkpoint_dir == "":
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        checkpoint_folder = f"checkpoint_train_{timestamp}_epochs{opt.nEpochs}/"
+    else:
+        checkpoint_folder = opt.checkpoint_dir
+        if not checkpoint_folder.endswith('/'):
+            checkpoint_folder += '/'
+    
+    # Créer le dossier s'il n'existe pas
+    if not os.path.exists(checkpoint_folder):
+        os.makedirs(checkpoint_folder)
+    
+    print(f"📁 Checkpoints seront sauvegardés dans: {checkpoint_folder}")
     print(opt)
     cuda = False
     opt.cuda = False
@@ -297,30 +314,30 @@ def input_matrix_wpn(inH, inW, add_id_channel=False):
 
 
 def save_checkpoint(model, epoch):
-    model_folder = "checkpoint/"
-    model_out_path = model_folder + "De_happy_model_epoch_{}.pth".format(epoch)
+    global checkpoint_folder
+    model_out_path = checkpoint_folder + "De_happy_model_epoch_{}.pth".format(epoch)
     state = {"epoch": epoch ,"model": model}
-    if not os.path.exists(model_folder):
-        os.makedirs(model_folder)
+    if not os.path.exists(checkpoint_folder):
+        os.makedirs(checkpoint_folder)
 
     torch.save(state, model_out_path)
     print("Checkpoint saved to {}".format(model_out_path))
 
 def save_opt(opt):
-    statistics_folder = "checkpoint/"
-    if not os.path.exists(statistics_folder):
-        os.makedirs(statistics_folder)
+    global checkpoint_folder
+    if not os.path.exists(checkpoint_folder):
+        os.makedirs(checkpoint_folder)
     data_frame = pd.DataFrame(
         data=vars(opt), index=range(1, 2))
-    data_frame.to_csv(statistics_folder + str(opt.start_epoch) + '_opt.csv', index_label='Epoch')
+    data_frame.to_csv(checkpoint_folder + str(opt.start_epoch) + '_opt.csv', index_label='Epoch')
     print("save--opt")
 
 def save_statistics(opt, results, epoch):
-    statistics_folder = "checkpoint/"
-    if not os.path.exists(statistics_folder):
-        os.makedirs(statistics_folder)
+    global checkpoint_folder
+    if not os.path.exists(checkpoint_folder):
+        os.makedirs(checkpoint_folder)
     data_frame = pd.DataFrame(
         data=results,index=range(opt.start_epoch, epoch + 1))
-    data_frame.to_csv(statistics_folder + str(opt.start_epoch) + '_train_results.csv', index_label='Epoch')   
+    data_frame.to_csv(checkpoint_folder + str(opt.start_epoch) + '_train_results.csv', index_label='Epoch')   
 if __name__ == "__main__":
     main()

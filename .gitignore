@@ -14,7 +14,8 @@ ENV/
 
 # Modèles PyTorch (trop volumineux pour Git)
 checkpoint/
-checkpoint1/*.pth
+checkpoint1/
+checkpoint_train_*/
 *.pth
 
 # Données de datasets (trop volumineux)
@@ -62,3 +63,4 @@ raw.tif
 *.zip
 *.tar.gz
 *.rar
+.venv/

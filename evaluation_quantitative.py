@@ -74,9 +74,9 @@ def main():
     print("📊 ÉVALUATION QUANTITATIVE - 16 BANDES SPECTRALES")
     print("=" * 60)
     
-    # 1. Chargement du modèle
+    # Chargement du modèle
     print("📋 Chargement du modèle...")
-    checkpoint_path = "checkpoint1/De_happy_model_epoch_8500.pth"
+    checkpoint_path = "checkpoint1/De_happy_model_epoch_250.pth"
     checkpoint = torch.load(checkpoint_path, map_location=torch.device('cpu'))
     model = checkpoint['model']
     model.eval()

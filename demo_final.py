@@ -46,8 +46,8 @@ def main():
     # 1. Chargement du modèle
     print("📋 Chargement du modèle...")
     try:
-        # Utiliser le modèle epoch qui contient l'objet complet
-        checkpoint_path = "checkpoint1/De_happy_model_epoch_8500.pth"
+        # TEST : Ancien modèle epoch 250 du dossier checkpoint1
+        checkpoint_path = "checkpoint1/De_happy_model_epoch_250.pth"
         checkpoint = torch.load(checkpoint_path, map_location=torch.device('cpu'))
         
         # Extraire le modèle de la clé 'model'
