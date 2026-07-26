@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1772516365 "/home/lawson/Documents/projet_Demosaic1/article/article.tex" "/home/lawson/Documents/projet_Demosaic1/article/article.pdf" "article" 1772516371
+["pdflatex"] 1773292739 "/home/lawson/Documents/projet_Demosaic1/article/article.tex" "/home/lawson/Documents/projet_Demosaic1/article/article.pdf" "article" 1774667494
   "../resultats_demo/comparaison_bande_10.png" 1764509559 1178704 9e6fce99ac43a596e7aebc8e3ed1c279 ""
   "../resultats_demo/comparaison_bande_15.png" 1764509565 1246705 e00bc614948d3a6514f8d865671be1ac ""
   "../resultats_demo/graphique_evolution_combine_250epochs.png" 1764498722 435304 c6683c2ce2d76f76c89f9b0abc9de713 ""
@@ -8,8 +8,8 @@
   "../resultats_demo/graphique_metriques_combine.png" 1764435117 354470 e0a9b52dcf27d2eca7c9933459bb5d8a ""
   "/etc/texmf/web2c/texmf.cnf" 1760030460 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/lawson/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk" 1761406675 11524 00ac569e6318063b4c0012299e4c6658 ""
-  "/home/lawson/Documents/projet_Demosaic1/article/article.aux" 1772516371 13972 7e2bfed22abbb6b508bcb1b3c514e69b ""
-  "/home/lawson/Documents/projet_Demosaic1/article/article.tex" 1772516365 47162 380ad2b96c9a6f078431c31e7035c7cc ""
+  "/home/lawson/Documents/projet_Demosaic1/article/article.aux" 1773292745 13972 7e2bfed22abbb6b508bcb1b3c514e69b ""
+  "/home/lawson/Documents/projet_Demosaic1/article/article.tex" 1774667493 47253 d155da8a0be7ca3e275f9571e24c6105 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -223,13 +223,13 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1771519138 4466317 b97f7403dceb3784bf6d64886e4ccfbc ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1767049957 4896779 ec528e34e0bd927702913b51102ebf3f ""
   "CaptureMTD.png" 1768011034 71743 99175bf792b146806990eafedb254b40 ""
-  "article.aux" 1772516371 13972 7e2bfed22abbb6b508bcb1b3c514e69b "pdflatex"
-  "article.out" 1772516371 3169 a3e24c134969fcfd990d2be2f5643172 "pdflatex"
-  "article.tex" 1772516365 47162 380ad2b96c9a6f078431c31e7035c7cc ""
+  "article.aux" 1773292745 13972 7e2bfed22abbb6b508bcb1b3c514e69b "pdflatex"
+  "article.out" 1773292745 3169 a3e24c134969fcfd990d2be2f5643172 "pdflatex"
+  "article.tex" 1774667493 47253 d155da8a0be7ca3e275f9571e24c6105 ""
   (generated)
-  "article.out"
   "article.log"
-  "article.pdf"
-  "article.aux"
-  "/home/lawson/Documents/projet_Demosaic1/article/article.log"
   "/home/lawson/Documents/projet_Demosaic1/article/article.pdf"
+  "article.aux"
+  "article.pdf"
+  "article.out"
+  "/home/lawson/Documents/projet_Demosaic1/article/article.log"

@@ -77,11 +77,10 @@ Hyperspectral imaging, Demosaicing, Multi-head Attention, Transformer, MSFA, Dee
 \end{IEEEkeywords}
 
 \section{Introduction}
-%%%%%%%%%%%%%%%%%%NOUVELLE REDACTION%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Multispectral imaging has become an essential tool in a wide range of applications,
 including remote sensing, medical diagnostics, and precision agriculture, by providing rich spectral 
 information far beyond the capabilities of conventional RGB cameras.
-%je continue ici
 To enable single-shot acquisition, \textbf{Multispectral Filter Arrays (MSFA)} are commonly used to
 capture spatially multiplexed spectral data in a a single exposure.
 However, this mosaicking process results in each pixel recording only a single spectral band, making
@@ -91,7 +90,8 @@ and aliasing artifacts introduced by the MSFA pattern.
 
 Early demosaicing methods relied on \textbf{interpolation techniques} such as bilinear 
 interpolation or guided filtering \cite{article}, which are computationally lightweight but fail 
-to accurately reconstruct high-frequency details, making them susceptible to spectral distortions and loss of fine details. With the rise of deep learning, 
+to accurately reconstruct high-frequency details, making them susceptible to spectral distortions 
+and loss of fine details. With the rise of deep learning, 
 \textbf{Convolutional Neural Networks (CNNs)} have been widely adopted for image restoration tasks, 
 including denoising \cite{Zhang2017}, super-resolution \cite{Dong2016}, and demosaicing 
 \cite{Monno2012}. CNN-based approaches for multispectral demosaicing exploit local convolutional 

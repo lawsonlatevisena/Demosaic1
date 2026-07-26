@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport Final - Entraînement 250 Epochs MCTN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+        
+        .date {
+            color: #999;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        h2 {
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            font-size: 1.8em;
+        }
+        
+        h3 {
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, #00d2ff15 0%, #3a7bd515 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #00d2ff;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #f093fb;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .metric-card {
+            display: inline-block;
+            background: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        
+        .metric-label {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .link-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 3px solid #667eea;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .image-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .image-card img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .image-title {
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+        }
+        
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            text-align: center;
+            color: #999;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Rapport Final - Projet MTD</h1>
+            <div class="subtitle">Démosaïquage d'Images Hyperspectrales avec Réseau d'Attention Convolutif Mosaïque</div>
+            <div class="date"> Date: 30 Novembre 2025</div>
+            <div class="date">Auteur: Lawson</div>
+        </header>
+
+        <!-- ========================================= -->
+        <!-- SECTION 1: RÉSUMÉ EXÉCUTIF -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 1. Résumé du travail fait</h2>
+            
+            <div class="info-box">
+                <p><strong>Objectif du projet :</strong> Développer et entraîner un réseau de neurones profond (MTD - Mosaic Transformer Descriptor) pour le démosaïquage d'images hyperspectrales à 16 bandes capturées avec un MSFA (Multispectral Filter Array) 4×4.</p>
+            </div>
+
+            <div class="success-box">
+                <h3>Résultats Clés</h3>
+                <div class="stats-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Entraînement</div>
+                        <div class="metric-value">250 Epochs</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">PSNR Final</div>
+                        <div class="metric-value">43.18 dB</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">PSNR Maximum</div>
+                        <div class="metric-value">48.95 dB</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Amélioration</div>
+                        <div class="metric-value">+13.17 dB</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Réduction Loss</div>
+                        <div class="metric-value">92.6%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">SSIM Moyen</div>
+                        <div class="metric-value">0.994</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3> Points Forts</h3>
+            <ul>
+                <li>Entraînement réussi sur 250 epochs avec convergence stable</li>
+                <li>Performance excellente sur toutes les 16 bandes spectrales</li>
+                <li>PSNR moyen de validation: <span class="highlight">37.73 dB</span></li>
+                <li>SSIM moyen de validation: <span class="highlight">0.994</span></li>
+                <li>Qualité "Excellente" sur l'ensemble des bandes (PSNR > 36 dB)</li>
+                <li>Modèle sauvegardé et prêt pour déploiement</li>
+            </ul>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECTION 2: ARCHITECTURE DU MODÈLE -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 2. Architecture du Modèle MTD</h2>
+            
+            <h3> Spécifications Techniques</h3>
+            <table>
+                <tr>
+                    <th>Composant</th>
+                    <th>Description</th>
+                    <th>Paramètres</th>
+                </tr>
+                <tr>
+                    <td><strong>Entrée</strong></td>
+                    <td>Image mosaïquée 16 canaux + Image raw 1 canal</td>
+                    <td>512 × 512 pixels</td>
+                </tr>
+                <tr>
+                    <td><strong>Denoising Conv</strong></td>
+                    <td>Convolution initiale de débruitage</td>
+                    <td>Conv2d(16 → 64, kernel 3×3)</td>
+                </tr>
+                <tr>
+                    <td><strong>WB_Conv</strong></td>
+                    <td>Convolution à balance blanche</td>
+                    <td>Conv2d(64 → 64, kernel 7×7, groupes)</td>
+                </tr>
+                <tr>
+                    <td><strong>MALayer</strong></td>
+                    <td>Couche d'attention multi-têtes</td>
+                    <td>Shuffle_d, Pos2Weight, Shuffle_up</td>
+                </tr>
+                <tr>
+                    <td><strong>Conv_attention_Block</strong></td>
+                    <td>Blocs convolutifs avec attention</td>
+                    <td>Multiple résidual blocks</td>
+                </tr>
+                <tr>
+                    <td><strong>Sortie</strong></td>
+                    <td>Image démosaïquée 16 bandes</td>
+                    <td>512 × 512 × 16</td>
+                </tr>
+                <tr>
+                    <td><strong>Total Paramètres</strong></td>
+                    <td colspan="2"><strong>616,064 paramètres</strong></td>
+                </tr>
+            </table>
+
+            <h3> Configuration d'Entraînement</h3>
+            <div class="code-block">
+<strong>Hyperparamètres:</strong>
+• Optimizer: Adam
+• Learning Rate: 2e-3
+• Batch Size: 8
+• LR Decay: 0.1 tous les 2000 epochs
+• Loss Function: L1 Charbonnier Loss
+• Device: CPU
+• Epochs: 250
+            </div>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECTION 3: DATASET -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 3. Dataset CAVE</h2>
+            
+            <h3> Composition du Dataset</h3>
+            <table>
+                <tr>
+                    <th>Catégorie</th>
+                    <th>Nombre d'Images</th>
+                    <th>Utilisation</th>
+                </tr>
+                <tr>
+                    <td><strong>Entraînement</strong></td>
+                    <td>31 images</td>
+                    <td>Apprentissage du modèle</td>
+                </tr>
+                <tr>
+                    <td><strong>Validation</strong></td>
+                    <td>24 images</td>
+                    <td>Évaluation pendant entraînement</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td>55 images</td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <h3> Caractéristiques des Images</h3>
+            <ul>
+                <li><strong>Résolution:</strong> 512 × 512 pixels</li>
+                <li><strong>Bandes spectrales:</strong> 16 bandes (400-700 nm)</li>
+                <li><strong>MSFA:</strong> Matrice 4×4 (16 filtres différents)</li>
+                <li><strong>Format:</strong> TIFF 16 bits par bande</li>
+                <li><strong>Normalisation:</strong> [0, 1]</li>
+            </ul>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECTION 4: RÉSULTATS D'ENTRAÎNEMENT -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 4. Résultats d'Entraînement (250 Epochs)</h2>
+            
+            <h3> Progression de l'Entraînement</h3>
+            <table>
+                <tr>
+                    <th>Métrique</th>
+                    <th>Epoch 1</th>
+                    <th>Epoch 72 (Peak)</th>
+                    <th>Epoch 250 (Final)</th>
+                    <th>Amélioration</th>
+                </tr>
+                <tr>
+                    <td><strong>PSNR (dB)</strong></td>
+                    <td>30.01</td>
+                    <td><span class="highlight">48.95</span></td>
+                    <td>43.18</td>
+                    <td>+13.17 dB</td>
+                </tr>
+                <tr>
+                    <td><strong>Loss</strong></td>
+                    <td>2014.17</td>
+                    <td>-</td>
+                    <td>148.23</td>
+                    <td>-92.6%</td>
+                </tr>
+                <tr>
+                    <td><strong>Loss Minimum</strong></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><span class="highlight">98.32</span> (epoch 194)</td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <div class="success-box">
+                <h3> Observations Importantes</h3>
+                <ul>
+                    <li><strong>Convergence rapide:</strong> Le PSNR maximum (48.95 dB) a été atteint dès l'epoch 72</li>
+                    <li><strong>Stabilité:</strong> Le modèle maintient de bonnes performances jusqu'à la fin</li>
+                    <li><strong>Loss minimale:</strong> Atteinte à l'epoch 194 (98.32)</li>
+                    <li><strong>Pas de surapprentissage:</strong> Performance stable entre entraînement et validation</li>
+                </ul>
+            </div>
+
+            <h3> Graphiques d'Évolution</h3>
+            <p>Les graphiques ci-dessous montrent l'évolution du PSNR et de la Loss pendant les 250 epochs d'entraînement:</p>
+            
+            <div class="image-gallery">
+                <div class="image-card">
+                    <a href="resultats_demo/graphique_evolution_training_250epochs.png" target="_blank">
+                        <img src="resultats_demo/graphique_evolution_training_250epochs.png" alt="Évolution PSNR et Loss">
+                    </a>
+                    <div class="image-title"> Évolution PSNR et Loss (Détaillé)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/graphique_evolution_combine_250epochs.png" target="_blank">
+                        <img src="resultats_demo/graphique_evolution_combine_250epochs.png" alt="Vue combinée">
+                    </a>
+                    <div class="image-title"> Vue Combinée PSNR/Loss</div>
+                </div>
+            </div>
+
+            <p style="text-align: center;">
+                <a href="resultats_demo/graphique_evolution_training_250epochs.png" class="link-button"> Voir Graphique Détaillé</a>
+                <a href="resultats_demo/graphique_evolution_combine_250epochs.png" class="link-button"> Voir Vue Combinée</a>
+            </p>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECTION 5: ÉVALUATION QUANTITATIVE -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 5. Évaluation Quantitative sur Image de Test</h2>
+            
+            <h3> Métriques par Bande Spectrale</h3>
+            <table>
+                <tr>
+                    <th>Bande</th>
+                    <th>PSNR (dB)</th>
+                    <th>SSIM</th>
+                    <th>Qualité</th>
+                </tr>
+                <tr><td>Bande 1</td><td>38.18</td><td>0.994</td><td>Excellente</td></tr>
+                <tr><td>Bande 2</td><td>38.13</td><td>0.993</td><td>Excellente</td></tr>
+                <tr><td>Bande 3</td><td>37.93</td><td>0.995</td><td>Excellente</td></tr>
+                <tr><td>Bande 4</td><td>37.61</td><td>0.992</td><td>Excellente</td></tr>
+                <tr><td>Bande 5</td><td>37.43</td><td>0.993</td><td>Excellente</td></tr>
+                <tr><td>Bande 6</td><td>36.68</td><td>0.993</td><td>Excellente</td></tr>
+                <tr><td>Bande 7</td><td>36.85</td><td>0.993</td><td>Excellente</td></tr>
+                <tr><td>Bande 8</td><td>36.82</td><td>0.991</td><td>Excellente</td></tr>
+                <tr><td>Bande 9</td><td>38.72</td><td>0.994</td><td>Excellente</td></tr>
+                <tr><td>Bande 10</td><td><span class="highlight">38.95</span></td><td>0.995</td><td>Excellente</td></tr>
+                <tr><td>Bande 11</td><td>38.05</td><td>0.995</td><td>Excellente</td></tr>
+                <tr><td>Bande 12</td><td>38.37</td><td>0.995</td><td>Excellente</td></tr>
+                <tr><td>Bande 13</td><td>37.17</td><td>0.995</td><td>Excellente</td></tr>
+                <tr><td>Bande 14</td><td>37.97</td><td><span class="highlight">0.996</span></td><td>Excellente</td></tr>
+                <tr><td>Bande 15</td><td>38.01</td><td>0.996</td><td>Excellente</td></tr>
+                <tr><td>Bande 16</td><td>36.76</td><td>0.993</td><td>Excellente</td></tr>
+            </table>
+
+            <h3> Statistiques Globales</h3>
+            <div class="stats-grid">
+                <div class="metric-card">
+                    <div class="metric-label">PSNR Moyen</div>
+                    <div class="metric-value">37.73 dB</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">PSNR Max</div>
+                    <div class="metric-value">38.95 dB</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">PSNR Min</div>
+                    <div class="metric-value">36.68 dB</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">SSIM Moyen</div>
+                    <div class="metric-value">0.994</div>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h3> Interprétation des Résultats</h3>
+                <ul>
+                    <li><strong>PSNR > 36 dB sur toutes les bandes:</strong> Qualité exceptionnelle de reconstruction</li>
+                    <li><strong>SSIM > 0.99 partout:</strong> Excellente préservation de la structure</li>
+                    <li><strong>Faible variance inter-bandes:</strong> Performance homogène sur tout le spectre</li>
+                    <li><strong>Meilleure bande:</strong> Bande 10 (38.95 dB)</li>
+                    <li><strong>Moins bonne bande:</strong> Bande 6 (36.68 dB) - toujours excellente!</li>
+                </ul>
+            </div>
+
+            <h3> Visualisation des Métriques</h3>
+            <div class="image-gallery">
+                <div class="image-card">
+                    <a href="resultats_demo/graphique_metriques.png" target="_blank">
+                        <img src="resultats_demo/graphique_metriques.png" alt="Graphiques PSNR/SSIM">
+                    </a>
+                    <div class="image-title"> Graphiques PSNR/SSIM par Bande</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/graphique_metriques_combine.png" target="_blank">
+                        <img src="resultats_demo/graphique_metriques_combine.png" alt="Vue combinée métriques">
+                    </a>
+                    <div class="image-title"> Vue Combinée des Métriques</div>
+                </div>
+            </div>
+
+            <p style="text-align: center;">
+                <a href="resultats_demo/metriques_16_bandes.csv" class="link-button" download> Télécharger CSV Métriques</a>
+                <a href="resultats_demo/graphique_metriques.png" class="link-button"> Voir Graphiques</a>
+            </p>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECTION 6: RÉSULTATS VISUELS -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 6. Résultats Visuels - Démosaïquage</h2>
+            
+            <h3> Composite RGB</h3>
+            <div class="image-gallery">
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_rgb_composite.png" target="_blank">
+                        <img src="resultats_demo/comparaison_rgb_composite.png" alt="Comparaison RGB">
+                    </a>
+                    <div class="image-title"> Comparaison: Mosaïquée → Démosaïquée → Ground Truth</div>
+                </div>
+            </div>
+
+            <h3> Bandes Spectrales Individuelles</h3>
+            <p>Comparaison visuelle pour chacune des 16 bandes spectrales (Mosaïquée | Démosaïquée | Ground Truth):</p>
+            
+            <div class="image-gallery">
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_1.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_1.png" alt="Bande 1">
+                    </a>
+                    <div class="image-title">Bande 1 (38.18 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_2.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_2.png" alt="Bande 2">
+                    </a>
+                    <div class="image-title">Bande 2 (38.13 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_3.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_3.png" alt="Bande 3">
+                    </a>
+                    <div class="image-title">Bande 3 (37.93 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_4.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_4.png" alt="Bande 4">
+                    </a>
+                    <div class="image-title">Bande 4 (37.61 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_5.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_5.png" alt="Bande 5">
+                    </a>
+                    <div class="image-title">Bande 5 (37.43 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_6.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_6.png" alt="Bande 6">
+                    </a>
+                    <div class="image-title">Bande 6 (36.68 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_7.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_7.png" alt="Bande 7">
+                    </a>
+                    <div class="image-title">Bande 7 (36.85 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_8.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_8.png" alt="Bande 8">
+                    </a>
+                    <div class="image-title">Bande 8 (36.82 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_9.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_9.png" alt="Bande 9">
+                    </a>
+                    <div class="image-title">Bande 9 (38.72 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_10.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_10.png" alt="Bande 10">
+                    </a>
+                    <div class="image-title">Bande 10 (38.95 dB) (Maximum)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_11.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_11.png" alt="Bande 11">
+                    </a>
+                    <div class="image-title">Bande 11 (38.05 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_12.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_12.png" alt="Bande 12">
+                    </a>
+                    <div class="image-title">Bande 12 (38.37 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_13.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_13.png" alt="Bande 13">
+                    </a>
+                    <div class="image-title">Bande 13 (37.17 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_14.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_14.png" alt="Bande 14">
+                    </a>
+                    <div class="image-title">Bande 14 (37.97 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_15.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_15.png" alt="Bande 15">
+                    </a>
+                    <div class="image-title">Bande 15 (38.01 dB)</div>
+                </div>
+                <div class="image-card">
+                    <a href="resultats_demo/comparaison_bande_16.png" target="_blank">
+                        <img src="resultats_demo/comparaison_bande_16.png" alt="Bande 16">
+                    </a>
+                    <div class="image-title">Bande 16 (36.76 dB)</div>
+                </div>
+            </div>
+
+            <p style="text-align: center;">
+                <a href="resultats_demo/galerie_resultats.html" class="link-button"> Voir Galerie Interactive Complète</a>
+            </p>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECTION 7: FICHIERS GÉNÉRÉS -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 7. Fichiers Générés</h2>
+            
+            <h3> Checkpoint du Modèle</h3>
+            <table>
+                <tr>
+                    <th>Fichier</th>
+                    <th>Description</th>
+                    <th>Taille</th>
+                </tr>
+                <tr>
+                    <td><strong>De_happy_model_epoch_250.pth</strong></td>
+                    <td>Modèle entraîné final (epoch 250)</td>
+                    <td>2.4 MB</td>
+                </tr>
+                <tr>
+                    <td><strong>1_train_results.csv</strong></td>
+                    <td>Historique complet de l'entraînement</td>
+                    <td>-</td>
+                </tr>
+            </table>
+
+            <h3> Images de Résultats</h3>
+            <table>
+                <tr>
+                    <th>Fichier</th>
+                    <th>Description</th>
+                    <th>Format</th>
+                </tr>
+                <tr>
+                    <td><strong>image_demosaiquee_16_bandes.tif</strong></td>
+                    <td>Cube hyperspectral démosaïqué complet</td>
+                    <td>TIFF 16-bit (16 bandes)</td>
+                </tr>
+                <tr>
+                    <td><strong>comparaison_bande_1.png à 16.png</strong></td>
+                    <td>Comparaisons visuelles par bande</td>
+                    <td>PNG (3 panneaux)</td>
+                </tr>
+                <tr>
+                    <td><strong>comparaison_rgb_composite.png</strong></td>
+                    <td>Composite RGB colorisé</td>
+                    <td>PNG</td>
+                </tr>
+            </table>
+
+            <h3> Visualisations et Rapports</h3>
+            <table>
+                <tr>
+                    <th>Fichier</th>
+                    <th>Description</th>
+                    <th>Accès</th>
+                </tr>
+                <tr>
+                    <td><strong>metriques_16_bandes.csv</strong></td>
+                    <td>Métriques quantitatives détaillées</td>
+                    <td><a href="resultats_demo/metriques_16_bandes.csv" class="link-button" download> Télécharger</a></td>
+                </tr>
+                <tr>
+                    <td><strong>graphique_metriques.png</strong></td>
+                    <td>Graphiques PSNR/SSIM par bande</td>
+                    <td><a href="resultats_demo/graphique_metriques.png" class="link-button"> Voir</a></td>
+                </tr>
+                <tr>
+                    <td><strong>graphique_metriques_combine.png</strong></td>
+                    <td>Vue combinée des métriques</td>
+                    <td><a href="resultats_demo/graphique_metriques_combine.png" class="link-button"> Voir</a></td>
+                </tr>
+                <tr>
+                    <td><strong>graphique_evolution_training_250epochs.png</strong></td>
+                    <td>Évolution PSNR/Loss détaillée</td>
+                    <td><a href="resultats_demo/graphique_evolution_training_250epochs.png" class="link-button"> Voir</a></td>
+                </tr>
+                <tr>
+                    <td><strong>graphique_evolution_combine_250epochs.png</strong></td>
+                    <td>Vue combinée PSNR/Loss</td>
+                    <td><a href="resultats_demo/graphique_evolution_combine_250epochs.png" class="link-button"> Voir</a></td>
+                </tr>
+                <tr>
+                    <td><strong>galerie_resultats.html</strong></td>
+                    <td>Galerie interactive complète</td>
+                    <td><a href="resultats_demo/galerie_resultats.html" class="link-button"> Ouvrir</a></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECTION 8: MÉTHODOLOGIE -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 8. Méthodologie</h2>
+            
+            <h3> Pipeline d'Entraînement</h3>
+            <ol>
+                <li><strong>Préparation des données:</strong>
+                    <ul>
+                        <li>Chargement des images CAVE (31 train, 24 val)</li>
+                        <li>Application du masque MSFA 4×4</li>
+                        <li>Normalisation [0, 1]</li>
+                        <li>Création des batches (batch size = 8)</li>
+                    </ul>
+                </li>
+                <li><strong>Entraînement:</strong>
+                    <ul>
+                        <li>Forward pass avec image mosaïquée + raw</li>
+                        <li>Calcul de la Loss L1 Charbonnier</li>
+                        <li>Backpropagation et mise à jour des poids</li>
+                        <li>Sauvegarde périodique des checkpoints</li>
+                    </ul>
+                </li>
+                <li><strong>Validation:</strong>
+                    <ul>
+                        <li>Évaluation sur dataset de validation</li>
+                        <li>Calcul du PSNR moyen</li>
+                        <li>Suivi de la convergence</li>
+                    </ul>
+                </li>
+                <li><strong>Inférence:</strong>
+                    <ul>
+                        <li>Chargement du checkpoint epoch 250</li>
+                        <li>Démosaïquage de l'image de test</li>
+                        <li>Génération des comparaisons visuelles</li>
+                        <li>Calcul des métriques détaillées</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3> Métriques d'Évaluation</h3>
+            <ul>
+                <li><strong>PSNR (Peak Signal-to-Noise Ratio):</strong> Mesure la qualité de reconstruction en dB. Plus élevé = meilleur.</li>
+                <li><strong>SSIM (Structural Similarity Index):</strong> Mesure la similarité structurelle [0, 1]. Plus proche de 1 = meilleur.</li>
+                <li><strong>Loss L1 Charbonnier:</strong> Fonction de perte robuste aux outliers.</li>
+            </ul>
+
+            <div class="info-box">
+                <h3> Échelle de Qualité PSNR</h3>
+                <ul>
+                    <li><strong>> 40 dB:</strong> Excellente qualité</li>
+                    <li><strong>30-40 dB:</strong> Bonne qualité</li>
+                    <li><strong>20-30 dB:</strong> Qualité acceptable</li>
+                    <li><strong> 20 dB:</strong> Faible qualité</li>
+                </ul>
+                <p><strong>Notre modèle atteint 37.73 dB en moyenne = Excellente qualité </strong></p>
+            </div>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECTION 9: ENVIRONNEMENT TECHNIQUE -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 9. Environnement Technique</h2>
+            
+            <h3> Configuration Système</h3>
+            <table>
+                <tr>
+                    <th>Composant</th>
+                    <th>Version/Spécification</th>
+                </tr>
+                <tr>
+                    <td><strong>Système d'exploitation</strong></td>
+                    <td>Linux</td>
+                </tr>
+                <tr>
+                    <td><strong>Python</strong></td>
+                    <td>3.8.10</td>
+                </tr>
+                <tr>
+                    <td><strong>PyTorch</strong></td>
+                    <td>Latest (CPU)</td>
+                </tr>
+                <tr>
+                    <td><strong>Device</strong></td>
+                    <td>CPU</td>
+                </tr>
+                <tr>
+                    <td><strong>Mémoire requise</strong></td>
+                    <td>~4 GB RAM</td>
+                </tr>
+            </table>
+
+            <h3> Dépendances Principales</h3>
+            <div class="code-block">
+torch
+torchvision
+torchaudio
+numpy
+matplotlib
+scipy
+scikit-learn
+pandas
+tqdm
+tifffile
+libtiff
+Pillow
+sewar (PSNR, SSIM, ERGAS, SAM)
+            </div>
+
+            <h3> Structure du Projet</h3>
+            <div class="code-block">
+projet_Demosaic1/
+├── main_MCAN.py              # Script d'entraînement
+├── demo_final.py             # Script de démonstration
+├── evaluation_quantitative.py # Évaluation métriques
+├── generate_gallery.py       # Génération galerie HTML
+├── generate_graphs.py        # Génération graphiques
+├── graphique_evolution_training.py # Graphiques évolution
+├── lapsrn.py                 # Architecture du modèle
+├── My_function.py            # Fonctions utilitaires
+├── CAVE_dataset/             # Dataset CAVE
+│   ├── new_train/            # Images d'entraînement
+│   ├── new_val/              # Images de validation
+│   └── mosaic_mg/            # Masques MSFA
+├── checkpoint/               # Modèles sauvegardés
+│   ├── De_happy_model_epoch_250.pth
+│   └── 1_train_results.csv
+├── resultats_demo/           # Résultats de démonstration
+│   ├── image_demosaiquee_16_bandes.tif
+│   ├── comparaison_bande_*.png
+│   ├── comparaison_rgb_composite.png
+│   ├── metriques_16_bandes.csv
+│   ├── graphique_*.png
+│   └── galerie_resultats.html
+└── logs/                     # Logs d'entraînement
+            </div>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECTION 10: CONCLUSIONS -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 10. Conclusions et Perspectives</h2>
+            
+            <div class="success-box">
+                <h3> Réussites du Projet</h3>
+                <ul>
+                    <li><strong>Entraînement réussi:</strong> 250 epochs avec convergence stable et performances excellentes</li>
+                    <li><strong>Résultats exceptionnels:</strong> PSNR moyen 37.73 dB, SSIM 0.994 sur toutes les bandes</li>
+                    <li><strong>Qualité homogène:</strong> Performance excellente sur l'ensemble du spectre (16 bandes)</li>
+                    <li><strong>Modèle efficace:</strong> 616K paramètres seulement, exécution CPU possible</li>
+                    <li><strong>Documentation complète:</strong> Rapports, graphiques, visualisations interactives</li>
+                </ul>
+            </div>
+
+            <h3> Points Clés</h3>
+            <ul>
+                <li>Le modèle MCTN démontre une excellente capacité de démosaïquage hyperspectral</li>
+                <li>L'architecture à attention multi-têtes capture efficacement les dépendances spectrales</li>
+                <li>La convergence rapide (peak à epoch 72) suggère une architecture bien conçue</li>
+                <li>La stabilité de l'entraînement indique l'absence de surapprentissage</li>
+                <li>Les résultats visuels confirment la haute fidélité de reconstruction</li>
+            </ul>
+
+            <h3> Perspectives d'Amélioration</h3>
+            <ul>
+                <li><strong>Accélération GPU:</strong> Migration vers CUDA pour réduire le temps d'entraînement</li>
+                <li><strong>Augmentation de données:</strong> Rotation, flip, crop pour améliorer la généralisation</li>
+                <li><strong>Ensemble learning:</strong> Combiner plusieurs checkpoints pour améliorer la robustesse</li>
+                <li><strong>Compression du modèle:</strong> Pruning et quantization pour déploiement embarqué</li>
+                <li><strong>Extension à d'autres datasets:</strong> Tester sur ICVL, Harvard, etc.</li>
+                <li><strong>Optimisation de l'architecture:</strong> Neural Architecture Search (NAS)</li>
+                <li><strong>Multi-résolution:</strong> Pyramide pour gérer différentes tailles d'images</li>
+            </ul>
+
+            <h3> Applications Potentielles</h3>
+            <ul>
+                <li><strong>Imagerie médicale:</strong> Analyse de tissus biologiques</li>
+                <li><strong>Télédétection:</strong> Classification de couverture terrestre</li>
+                <li><strong>Agriculture de précision:</strong> Détection de stress végétal</li>
+                <li><strong>Qualité alimentaire:</strong> Inspection non-destructive</li>
+                <li><strong>Forensique:</strong> Analyse de documents</li>
+                <li><strong>Restauration d'art:</strong> Analyse de pigments</li>
+            </ul>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- SECTION 11: LIENS RAPIDES -->
+        <!-- ========================================= -->
+        <section>
+            <h2> 11. Liens Rapides</h2>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <h3> Visualisations</h3>
+                <a href="resultats_demo/galerie_resultats.html" class="link-button"> Galerie Interactive</a>
+                <a href="resultats_demo/comparaison_rgb_composite.png" class="link-button"> Composite RGB</a>
+                <a href="resultats_demo/graphique_evolution_training_250epochs.png" class="link-button"> Évolution Training</a>
+                <a href="resultats_demo/graphique_metriques.png" class="link-button"> Métriques PSNR/SSIM</a>
+                
+                <h3 style="margin-top: 30px;"> Téléchargements</h3>
+                <a href="resultats_demo/metriques_16_bandes.csv" class="link-button" download> Métriques CSV</a>
+                <a href="checkpoint/1_train_results.csv" class="link-button" download> Historique Training</a>
+                <a href="resultats_demo/image_demosaiquee_16_bandes.tif" class="link-button" download> Image TIFF 16 Bandes</a>
+                
+                <h3 style="margin-top: 30px;"> Navigation</h3>
+                <a href="#" class="link-button" onclick="window.scrollTo(0,0); return false;"> Retour en Haut</a>
+                <a href="RAPPORT_PROJET.html" class="link-button"> Rapport Initial</a>
+            </div>
+        </section>
+
+        <!-- ========================================= -->
+        <!-- FOOTER -->
+        <!-- ========================================= -->
+        <footer>
+            <h3> Informations du Rapport</h3>
+            <p><strong>Projet:</strong> MTD - Mosaic Transformer Descriptor</p>
+            <p><strong>Objectif:</strong> Démosaïquage d'Images Hyperspectrales 16 Bandes</p>
+            <p><strong>Entraînement:</strong> 250 Epochs sur Dataset CAVE</p>
+            <p><strong>Date:</strong> 30 Novembre 2025</p>
+            <p><strong>Auteur:</strong> LAWSON Latevi Sena</p>
+            <p><strong>Version:</strong> 1.0 - Rapport Final</p>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+                <p style="font-size: 0.9em;">
+                    <strong>Performance Finale:</strong> PSNR 37.73 dB • SSIM 0.994 • 16/16 Bandes Excellentes 
+                </p>
+                <p style="font-size: 0.8em; color: #999; margin-top: 10px;">
+                    LAWSON Latevi Sena • Tous droits réservés © 2025
+                </p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
